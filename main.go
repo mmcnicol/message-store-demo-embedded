@@ -35,10 +35,16 @@ func main() {
 
 	// Start a goroutine to poll SYSTEM_AUDIT_EVENT_TOPIC
 	go backend.pollSystemAuditEvent(ctx)
+
 	// Start a goroutine to poll USER_LOGIN_ATTEMPT_TOPIC
 	go backend.pollUserLoginAttempt(ctx)
 	// Start a goroutine to poll USER_LOGIN_ATTEMPT_OUTCOME_TOPIC
 	go backend.pollUserLoginAttemptOutcome(ctx)
+
+	// Start a goroutine to poll USER_SUBJECT_ACCESS_ATTEMPT_TOPIC
+	go backend.pollUserSubjectAccessAttempt(ctx)
+	// Start a goroutine to poll USER_SUBJECT_ACCESS_ATTEMPT_TOPIC_OUTCOME
+	go backend.pollUserSubjectAccessAttemptOutcome(ctx)
 
 	// Start a goroutine to generate user login attempts to USER_LOGIN_ATTEMPT_TOPIC
 	go backend.generateUserLoginAttempts(ctx)

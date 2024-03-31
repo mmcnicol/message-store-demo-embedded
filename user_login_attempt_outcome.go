@@ -98,4 +98,7 @@ func (b *Backend) processEntryFromPollUserLoginAttemptOutcome(entry ms.Entry) {
 		fmt.Printf("failed to unmarshal userLoginAttemptOutcome: %v", err)
 	}
 	fmt.Printf("received userLoginAttemptOutcome: %v\n", userLoginAttemptOutcome)
+	if userLoginAttemptOutcome.Outcome {
+		b.generateUserSubjectAccessAttempt(userLoginAttemptOutcome.UserName)
+	}
 }

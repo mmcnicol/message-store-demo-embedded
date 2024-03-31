@@ -25,6 +25,16 @@ func NewSystemAuditEvent(userName, auditEvent string) *SystemAuditEvent {
 	}
 }
 
+// NewSystemAuditEvent creates a new instance of SystemAuditEvent with subject identifier
+func NewSystemAuditEventWithSubject(userName, subjectIdentifier, auditEvent string) *SystemAuditEvent {
+
+	return &SystemAuditEvent{
+		UserName:          userName,
+		SubjectIdentifier: subjectIdentifier,
+		AuditEvent:        auditEvent,
+	}
+}
+
 // sendSystemAuditEvent sends a system audit event to a topic
 func (b *Backend) sendSystemAuditEvent(systemAuditEvent SystemAuditEvent) {
 
