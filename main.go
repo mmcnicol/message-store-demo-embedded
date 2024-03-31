@@ -33,14 +33,14 @@ func main() {
 
 	backend := NewBackend()
 
-	// Start a goroutine to poll topic "system.audit.event"
+	// Start a goroutine to poll SYSTEM_AUDIT_EVENT_TOPIC
 	go backend.pollSystemAuditEvent(ctx)
-	// Start a goroutine to poll topic "user.login.attempt"
+	// Start a goroutine to poll USER_LOGIN_ATTEMPT_TOPIC
 	go backend.pollUserLoginAttempt(ctx)
-	// Start a goroutine to poll topic "user.login.attempt.outcome"
+	// Start a goroutine to poll USER_LOGIN_ATTEMPT_OUTCOME_TOPIC
 	go backend.pollUserLoginAttemptOutcome(ctx)
 
-	// Start a goroutine to generate user login attempts to topic "user.login.attempt"
+	// Start a goroutine to generate user login attempts to USER_LOGIN_ATTEMPT_TOPIC
 	go backend.generateUserLoginAttempts(ctx)
 
 	// Wait for termination signal

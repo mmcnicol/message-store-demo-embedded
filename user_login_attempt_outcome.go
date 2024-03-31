@@ -36,7 +36,7 @@ func (b *Backend) getUserLoginAttemptOutcome() bool {
 // sendUserLoginAttemptOutcome sends a user login attempt outcome to a topic
 func (b *Backend) sendUserLoginAttemptOutcome(userLoginAttemptOutcome UserLoginAttemptOutcome) {
 
-	topic := USER_LOGIN_ATTEMPT_OUTCOME
+	topic := USER_LOGIN_ATTEMPT_OUTCOME_TOPIC
 
 	eventJSON, err := json.Marshal(userLoginAttemptOutcome)
 	if err != nil {
@@ -57,7 +57,7 @@ func (b *Backend) sendUserLoginAttemptOutcome(userLoginAttemptOutcome UserLoginA
 // pollUserLoginAttemptOutcome polls the topic for user login attempt outcomes
 func (b *Backend) pollUserLoginAttemptOutcome(ctx context.Context) {
 
-	topic := USER_LOGIN_ATTEMPT_OUTCOME
+	topic := USER_LOGIN_ATTEMPT_OUTCOME_TOPIC
 	offset := int64(-1)
 	pollDuration := 100 * time.Millisecond
 

@@ -28,7 +28,7 @@ func NewSystemAuditEvent(userName, auditEvent string) *SystemAuditEvent {
 // sendSystemAuditEvent sends a system audit event to a topic
 func (b *Backend) sendSystemAuditEvent(systemAuditEvent SystemAuditEvent) {
 
-	topic := SYSTEM_AUDIT_EVENT
+	topic := SYSTEM_AUDIT_EVENT_TOPIC
 
 	eventJSON, err := json.Marshal(systemAuditEvent)
 	if err != nil {
@@ -49,7 +49,7 @@ func (b *Backend) sendSystemAuditEvent(systemAuditEvent SystemAuditEvent) {
 // pollSystemAuditEvent polls the topic for system audit events
 func (b *Backend) pollSystemAuditEvent(ctx context.Context) {
 
-	topic := SYSTEM_AUDIT_EVENT
+	topic := SYSTEM_AUDIT_EVENT_TOPIC
 	offset := int64(-1)
 	pollDuration := 100 * time.Millisecond
 

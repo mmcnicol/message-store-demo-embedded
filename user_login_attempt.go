@@ -88,7 +88,7 @@ func (b *Backend) generateRandomPassword(userPasswordLength int) string {
 // sendUserLoginAttempt sends a user login attempt to a topic
 func (b *Backend) sendUserLoginAttempt(userLoginAttempt UserLoginAttempt) {
 
-	topic := USER_LOGIN_ATTEMPT
+	topic := USER_LOGIN_ATTEMPT_TOPIC
 
 	eventJSON, err := json.Marshal(userLoginAttempt)
 	if err != nil {
@@ -109,7 +109,7 @@ func (b *Backend) sendUserLoginAttempt(userLoginAttempt UserLoginAttempt) {
 // pollUserLoginAttempt polls the topic for user login attempts
 func (b *Backend) pollUserLoginAttempt(ctx context.Context) {
 
-	topic := USER_LOGIN_ATTEMPT
+	topic := USER_LOGIN_ATTEMPT_TOPIC
 	offset := int64(-1)
 	pollDuration := 100 * time.Millisecond
 
