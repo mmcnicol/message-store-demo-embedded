@@ -2,7 +2,7 @@
 
 this is an example application which simulates activity in an application, using an event driven architecture.
 
-it embeds the [message store](https://github.com/mmcnicol/message-store) library to produce and consume messages to topics. 
+it embeds the [message store](https://github.com/mmcnicol/message-store) library which facilitates message topics. topic messages can be produced and consumed.
 
 ## associated projects
 
