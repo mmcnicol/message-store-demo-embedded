@@ -38,7 +38,7 @@ func (b *Backend) getUserSubjectAccessAttemptOutcome() bool {
 // sendUserSubjectAccessAttemptOutcome sends a user subject access attempt outcome to a topic
 func (b *Backend) sendUserSubjectAccessAttemptOutcome(userSubjectAccessAttemptOutcome UserSubjectAccessAttemptOutcome) {
 
-	topic := USER_SUBJECT_ACCESS_ATTEMPT_TOPIC_OUTCOME
+	topic := USER_SUBJECT_ACCESS_ATTEMPT_OUTCOME_TOPIC
 
 	eventJSON, err := json.Marshal(userSubjectAccessAttemptOutcome)
 	if err != nil {
@@ -59,7 +59,7 @@ func (b *Backend) sendUserSubjectAccessAttemptOutcome(userSubjectAccessAttemptOu
 // pollUserSubjectAccessAttemptOutcome polls the topic for user subject access attempt outcomes
 func (b *Backend) pollUserSubjectAccessAttemptOutcome(ctx context.Context) {
 
-	topic := USER_SUBJECT_ACCESS_ATTEMPT_TOPIC_OUTCOME
+	topic := USER_SUBJECT_ACCESS_ATTEMPT_OUTCOME_TOPIC
 	offset := int64(-1)
 	pollDuration := 100 * time.Millisecond
 
@@ -100,4 +100,27 @@ func (b *Backend) processEntryFromPollUserSubjectAccessAttemptOutcome(entry ms.E
 		fmt.Printf("failed to unmarshal userSubjectAccessAttemptOutcome: %v", err)
 	}
 	fmt.Printf("received userSubjectAccessAttemptOutcome: %v\n", userSubjectAccessAttemptOutcome)
+	if userSubjectAccessAttemptOutcome.Outcome {
+		regions := []int{
+			AYRSHIRE_AND_ARRAN_REGION,
+			BORDERS_REGION,
+			DUMFRIES_AND_GALLOWAY_REGION,
+			FIFE_REGION,
+			FORTH_VALLEY_REGION,
+			GRAMPIAN_REGION,
+			GREATER_GLASGOW_AND_CYLDE_REGION,
+			HIGHLAND_REGION,
+			LOTHIAN_REGION,
+			LANARKSHIRE_REGION,
+			ORKNEY_REGION,
+			SHETLAND_REGION,
+			TAYSIDE_REGION,
+			WESTERN_ISLES_REGION,
+		}
+
+		for _, region := range regions {
+			subjectRegionDocumentRequest := NewSubjectRegionDocumentRequest(userSubjectAccessAttemptOutcome.SubjectIdentifier, region, userSubjectAccessAttemptOutcome.UserName)
+			b.sendSubjectRegionDocumentRequest(*subjectRegionDocumentRequest)
+		}
+	}
 }

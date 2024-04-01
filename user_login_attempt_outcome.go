@@ -28,9 +28,14 @@ func NewUserLoginAttemptOutcome(userName string, outcome bool) *UserLoginAttempt
 // getUserLoginAttemptOutcome returns a user login attempt outcome
 func (b *Backend) getUserLoginAttemptOutcome() bool {
 
-	// Generate a random boolean value
-	randomBool := rand.Intn(2) == 0 // Returns true with 50% probability, false with 50% probability
-	return randomBool
+	// Seed the random number generator to ensure different results each time
+	rand.Seed(time.Now().UnixNano())
+
+	// Generate a random integer between 0 and 9
+	randomNumber := rand.Intn(10) // Generates numbers in the range [0, 9]
+
+	// Return true with 90% probability
+	return randomNumber < 9
 }
 
 // sendUserLoginAttemptOutcome sends a user login attempt outcome to a topic

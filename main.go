@@ -43,8 +43,13 @@ func main() {
 
 	// Start a goroutine to poll USER_SUBJECT_ACCESS_ATTEMPT_TOPIC
 	go backend.pollUserSubjectAccessAttempt(ctx)
-	// Start a goroutine to poll USER_SUBJECT_ACCESS_ATTEMPT_TOPIC_OUTCOME
+	// Start a goroutine to poll USER_SUBJECT_ACCESS_ATTEMPT_OUTCOME_TOPIC
 	go backend.pollUserSubjectAccessAttemptOutcome(ctx)
+
+	// Start a goroutine to poll SUBJECT_REGION_DOCUMENT_REQUEST_TOPIC
+	go backend.pollSubjectRegionDocumentRequest(ctx)
+	// Start a goroutine to poll SUBJECT_REGION_DOCUMENT_RESPONSE_TOPIC
+	go backend.pollSubjectRegionDocumentResponse(ctx)
 
 	// Start a goroutine to generate user login attempts to USER_LOGIN_ATTEMPT_TOPIC
 	go backend.generateUserLoginAttempts(ctx)
