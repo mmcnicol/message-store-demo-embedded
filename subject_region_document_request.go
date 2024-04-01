@@ -97,6 +97,7 @@ func (b *Backend) processEntryFromPollSubjectRegionDocumentRequest(entry ms.Entr
 
 // processSubjectRegionDocumentRequest processes a subject region document request
 func (b *Backend) processSubjectRegionDocumentRequest(subjectRegionDocumentRequest SubjectRegionDocumentRequest) {
+
 	// Generate a random number between 0 and 99
 	randomNumber := rand.Intn(100)
 

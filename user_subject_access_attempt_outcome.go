@@ -30,9 +30,11 @@ func NewUserSubjectAccessAttemptOutcome(userName string, subjectIdentifier strin
 // getUserSubjectAccessAttemptOutcome returns a user subject access attempt outcome
 func (b *Backend) getUserSubjectAccessAttemptOutcome() bool {
 
-	// Generate a random boolean value
-	randomBool := rand.Intn(2) == 0 // Returns true with 50% probability, false with 50% probability
-	return randomBool
+	// Generate a random number between 0 and 99
+	randomNumber := rand.Intn(100)
+
+	// Return true with 80% probability
+	return randomNumber < 80
 }
 
 // sendUserSubjectAccessAttemptOutcome sends a user subject access attempt outcome to a topic
